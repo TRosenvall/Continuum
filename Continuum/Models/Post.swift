@@ -58,7 +58,7 @@ class Post {
       let commentCount = ckRecord[PostConstants.commentCountKey] as? Int
       else { return nil}
       
-      let photoData = try Data(contentsOf: photoAsset.fileURL)
+      let photoData = try Data(contentsOf: photoAsset.fileURL!)
       self.caption = caption
       self.timestamp = timestamp
       self.photoData = photoData

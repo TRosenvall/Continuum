@@ -122,7 +122,7 @@ class PostController {
   func subscribeToNewPosts(completion: ((Bool, Error?) -> Void)?){
     let predicate = NSPredicate(value: true)
     //Create a subscription for all Post record creations
-    let subscription = CKQuerySubscription(recordType: "Post", predicate: predicate, subscriptionID: "AllPosts", options: .firesOnRecordCreation)
+    let subscription = CKQuerySubscription(recordType: "Post", predicate: predicate, subscriptionID: "AllPosts", options: CKQuerySubscription.Options.firesOnRecordCreation)
     //Create the info that can be passed to the app when the subsription fires
     let notifcationInfo = CKSubscription.NotificationInfo()
     notifcationInfo.alertBody = "New post added to Continuum"
@@ -146,7 +146,7 @@ class PostController {
     //Create a filter for all comment matching the given post ID
     let predicate = NSPredicate(format: "%K = %@", CommentConstants.postReferenceKey, postRecordID)
     //Create the subscription for comments using this filter.  Use the post's record ID as the subscriptionID to keep track of this subscription.  We can use this to unsubscribe later
-    let subscription = CKQuerySubscription(recordType: "Comment", predicate: predicate, subscriptionID: post.recordID.recordName, options: .firesOnRecordCreation)
+    let subscription = CKQuerySubscription(recordType: "Comment", predicate: predicate, subscriptionID: post.recordID.recordName, options: CKQuerySubscription.Options.firesOnRecordCreation)
     //Create the comments notificiation Info
     let notificationInfo = CKSubscription.NotificationInfo()
     notificationInfo.alertBody = "A new comment was added a a post you follow!"
